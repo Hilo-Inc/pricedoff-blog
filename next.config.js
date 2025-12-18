@@ -1,4 +1,5 @@
 const { withContentlayer } = require('next-contentlayer2')
+const path = require('path')
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
@@ -94,6 +95,13 @@ module.exports = () => {
         test: /\.svg$/,
         use: ['@svgr/webpack'],
       })
+
+      // Explicit alias for contentlayer/generated (Windows compatibility)
+      config.resolve.alias['contentlayer/generated'] = path.join(
+        process.cwd(),
+        '.contentlayer',
+        'generated'
+      )
 
       return config
     },
