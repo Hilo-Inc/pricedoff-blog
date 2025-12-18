@@ -6,7 +6,8 @@
       "Bash(node:*)",
       "Bash(Remove-Item -Recurse -Force .next -ErrorAction SilentlyContinue)",
       "Bash(Remove-Item -Recurse -Force .contentlayer -ErrorAction SilentlyContinue)",
-      "Bash(Remove-Item -Recurse -Force node_modules.cache -ErrorAction SilentlyContinue)"
+      "Bash(Remove-Item -Recurse -Force node_modules.cache -ErrorAction SilentlyContinue)",
+      "Bash(yarn build:*)"
     ]
   }
 }

@@ -5,6 +5,18 @@ import type { MDXComponents } from 'mdx/types'
 import Image from './Image'
 import CustomLink from './Link'
 import TableWrapper from './TableWrapper'
+// Product components for deals/reviews
+import {
+  PriceDisplay,
+  DealBadge,
+  StarRating,
+  BuyButton,
+  ProsCons,
+  SpecsTable,
+  PriceComparison,
+  ProductCard,
+  ProductHero,
+} from './product'
 
 export const components: MDXComponents = {
   Image,
@@ -13,4 +25,14 @@ export const components: MDXComponents = {
   pre: Pre,
   table: TableWrapper,
   BlogNewsletterForm,
+  // Product components - available in all MDX files
+  PriceDisplay,
+  DealBadge,
+  StarRating,
+  BuyButton,
+  ProsCons,
+  SpecsTable,
+  PriceComparison,
+  ProductCard,
+  ProductHero,
 }

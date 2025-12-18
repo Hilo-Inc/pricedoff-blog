@@ -109,21 +109,74 @@ export const Blog = defineDocumentType(() => ({
     layout: { type: 'string' },
     bibliography: { type: 'string' },
     canonicalUrl: { type: 'string' },
+    // Product-specific fields for deals/reviews
+    currentPrice: { type: 'number' },
+    originalPrice: { type: 'number' },
+    currency: { type: 'string', default: 'USD' },
+    retailer: { type: 'string' },
+    retailerLogo: { type: 'string' },
+    dealExpires: { type: 'date' },
+    productRating: { type: 'number' },
+    affiliateLink: { type: 'string' },
+    productBrand: { type: 'string' },
+    productCategory: { type: 'string' },
+    isTopDeal: { type: 'boolean', default: false },
+    pros: { type: 'list', of: { type: 'string' }, default: [] },
+    cons: { type: 'list', of: { type: 'string' }, default: [] },
+    specifications: { type: 'json' },
   },
   computedFields: {
     ...computedFields,
+    discountPercentage: {
+      type: 'number',
+      resolve: (doc) => {
+        if (doc.originalPrice && doc.currentPrice) {
+          return Math.round(((doc.originalPrice - doc.currentPrice) / doc.originalPrice) * 100)
+        }
+        return 0
+      },
+    },
     structuredData: {
       type: 'json',
-      resolve: (doc) => ({
-        '@context': 'https://schema.org',
-        '@type': 'BlogPosting',
-        headline: doc.title,
-        datePublished: doc.date,
-        dateModified: doc.lastmod || doc.date,
-        description: doc.summary,
-        image: doc.images ? doc.images[0] : siteMetadata.socialBanner,
-        url: `${siteMetadata.siteUrl}/${doc._raw.flattenedPath}`,
-      }),
+      resolve: (doc) => {
+        const baseData = {
+          '@context': 'https://schema.org',
+          '@type': 'BlogPosting',
+          headline: doc.title,
+          datePublished: doc.date,
+          dateModified: doc.lastmod || doc.date,
+          description: doc.summary,
+          image: doc.images ? doc.images[0] : siteMetadata.socialBanner,
+          url: `${siteMetadata.siteUrl}/${doc._raw.flattenedPath}`,
+        }
+
+        // Add Product structured data if it's a product review/deal
+        if (doc.currentPrice || doc.originalPrice) {
+          return {
+            ...baseData,
+            '@type': ['BlogPosting', 'Product'],
+            name: doc.title,
+            brand: doc.productBrand ? { '@type': 'Brand', name: doc.productBrand } : undefined,
+            offers: {
+              '@type': 'Offer',
+              price: doc.currentPrice,
+              priceCurrency: doc.currency || 'USD',
+              availability: 'https://schema.org/InStock',
+              seller: doc.retailer ? { '@type': 'Organization', name: doc.retailer } : undefined,
+              priceValidUntil: doc.dealExpires,
+            },
+            aggregateRating: doc.productRating
+              ? {
+                  '@type': 'AggregateRating',
+                  ratingValue: doc.productRating,
+                  bestRating: 5,
+                }
+              : undefined,
+          }
+        }
+
+        return baseData
+      },
     },
   },
 }))
