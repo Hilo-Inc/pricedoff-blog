@@ -56,7 +56,7 @@ export default function PriceDisplay({
 
   return (
     <div className="flex flex-wrap items-baseline gap-3">
-      <span className={`${classes.current} text-green-600 dark:text-green-400`}>
+      <span className={`${classes.current} text-emerald-600 dark:text-emerald-400`}>
         {symbol}
         {currentPrice.toFixed(2)}
       </span>
@@ -69,7 +69,7 @@ export default function PriceDisplay({
           </span>
 
           <span
-            className={`${classes.badge} rounded-full bg-red-100 font-semibold text-red-700 dark:bg-red-900 dark:text-red-200`}
+            className={`${classes.badge} rounded-full bg-rose-100 font-semibold text-rose-700 dark:bg-rose-900 dark:text-rose-200`}
           >
             -{discountPercentage}%
           </span>
@@ -77,7 +77,7 @@ export default function PriceDisplay({
       )}
 
       {hasDiscount && showSavings && (
-        <span className={`${classes.savings} text-green-700 dark:text-green-300`}>
+        <span className={`${classes.savings} text-emerald-700 dark:text-emerald-300`}>
           You save {symbol}
           {savings.toFixed(2)}
         </span>

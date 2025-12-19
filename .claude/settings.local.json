@@ -7,7 +7,13 @@
       "Bash(Remove-Item -Recurse -Force .next -ErrorAction SilentlyContinue)",
       "Bash(Remove-Item -Recurse -Force .contentlayer -ErrorAction SilentlyContinue)",
       "Bash(Remove-Item -Recurse -Force node_modules.cache -ErrorAction SilentlyContinue)",
-      "Bash(yarn build:*)"
+      "Bash(yarn build:*)",
+      "Bash(Remove-Item \"c:\\\\Users\\\\truth\\\\www\\\\pricedoff-blog\\\\data\\\\blog\\\\github-markdown-guide.mdx\")",
+      "Bash(Remove-Item \"c:\\\\Users\\\\truth\\\\www\\\\pricedoff-blog\\\\data\\\\blog\\\\guide-to-using-images-in-nextjs.mdx\")",
+      "Bash(Remove-Item \"c:\\\\Users\\\\truth\\\\www\\\\pricedoff-blog\\\\data\\\\blog\\\\introducing-tailwind-nextjs-starter-blog.mdx\")",
+      "Bash(Remove-Item \"c:\\\\Users\\\\truth\\\\www\\\\pricedoff-blog\\\\data\\\\blog\\\\new-features-in-v1.mdx\")",
+      "Bash(Remove-Item \"c:\\\\Users\\\\truth\\\\www\\\\pricedoff-blog\\\\data\\\\blog\\\\release-of-tailwind-nextjs-starter-blog-v2.0.mdx\")",
+      "Bash(Remove-Item -Recurse -Force \"c:\\\\Users\\\\truth\\\\www\\\\pricedoff-blog\\\\data\\\\blog\\\\nested-route\")"
     ]
   }
 }

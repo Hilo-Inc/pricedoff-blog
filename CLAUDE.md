@@ -185,3 +185,211 @@ Husky is configured for pre-commit hooks with lint-staged:
 
 ### Dark Mode
 Theme switching via `next-themes`. Configured in `app/theme-providers.tsx`. Default theme set in siteMetadata.theme (system/dark/light).
+
+---
+
+## MDX Authoring Reference
+
+This section provides reference documentation for writing MDX blog posts.
+
+### Markdown Syntax Guide
+
+GitHub Flavored Markdown is supported via `unified` and remark/rehype plugins.
+
+#### Headers
+```
+# H1 heading
+## H2 heading
+### H3 heading
+#### H4 heading
+```
+
+#### Emphasis
+```
+_italic text_
+**bold text**
+_You **can** combine them_
+```
+
+#### Lists
+
+**Unordered:**
+```
+- Item 1
+- Item 2
+  - Nested item
+```
+
+**Ordered:**
+```
+1. First item
+2. Second item
+   1. Nested item
+```
+
+#### Links and Images
+```
+[Link text](https://example.com)
+![Alt text](/static/images/example.jpg)
+```
+
+#### Blockquotes
+```
+> This is a blockquote
+```
+
+#### Inline Code
+```
+Use `backticks` for inline code
+```
+
+#### Code Blocks with Syntax Highlighting
+
+Use triple backticks with language identifier and optional filename:
+
+````
+```js:filename.js
+function example() {
+  return 'hello'
+}
+```
+````
+
+**Line highlighting and line numbers:**
+````
+```js {1,3-4} showLineNumbers
+var num1, num2, sum
+num1 = prompt('Enter first number')
+num2 = prompt('Enter second number')
+sum = parseInt(num1) + parseInt(num2)
+```
+````
+
+#### Tables
+```
+| Header 1 | Header 2 |
+| -------- | -------- |
+| Cell 1   | Cell 2   |
+```
+
+#### Task Lists
+```
+- [x] Completed task
+- [ ] Incomplete task
+```
+
+#### Footnotes
+```
+Here is a footnote[^1].
+
+[^1]: Footnote content.
+```
+
+#### GitHub Alerts
+```
+> [!NOTE]
+> Useful information
+
+> [!WARNING]
+> Important warning
+
+> [!CAUTION]
+> Critical information
+```
+
+### Images in Next.js
+
+The template uses `next/image` for automatic image optimization.
+
+**In MDX files:**
+```
+![Alt text](/static/images/example.jpg)
+```
+The default `img` tag is automatically replaced with Next.js Image component.
+
+**Direct component usage:**
+```jsx
+<Image alt="description" src="/static/images/example.jpg" width={256} height={128} />
+```
+
+**Benefits:**
+- Smaller image size with WebP (~30% smaller than JPEG)
+- Responsive images based on viewport
+- Lazy loading
+- Prevents Cumulative Layout Shift
+
+**Note:** All images must be stored in the `public` folder (e.g., `/static/images/`).
+
+### Nested Routes / Multi-part Posts
+
+Create posts in nested sub-folders within `/data/blog/`:
+```
+data/blog/series-name/part-1.mdx
+data/blog/series-name/part-2.mdx
+```
+
+Use cases:
+- Multi-part tutorials or courses
+- Organizing related content
+- Different sub-routes for authors
+
+### Table of Contents Component
+
+Use `TOCInline` component in MDX files:
+
+```jsx
+<TOCInline toc={props.toc} exclude="Introduction" toHeading={2} />
+```
+
+**Props:**
+- `toc` - Pass `props.toc` from the MDX context
+- `exclude` - String or array of headings to exclude
+- `fromHeading` / `toHeading` - Filter heading levels (default: 1-6)
+- `indentDepth` - Depth at which to start indenting (default: 3)
+- `asDisclosure` - Render as expandable disclosure element
+
+### Bibliography and Citations
+
+Add a bibliography file reference in frontmatter:
+```yaml
+bibliography: references-data.bib
+```
+
+Citation syntax:
+```
+Standard citation [@AuthorYear]
+In-text citation @AuthorYear
+Multiple citations [see @Author1; @Author2, page 50]
+```
+
+Insert bibliography:
+```
+[^ref]
+```
+
+Supported CSL styles: apa, vancouver, harvard1, chicago, mla, or custom CSL file path.
+
+### Newsletter Component
+
+Embed newsletter signup in posts:
+```jsx
+<BlogNewsletterForm title="Subscribe to updates" />
+```
+
+### Multiple Authors
+
+Reference author files in frontmatter:
+```yaml
+authors: ['default', 'other-author']
+```
+
+Author files are in `data/authors/` (e.g., `default.mdx`, `other-author.mdx`).
+
+### Layout Options
+
+Specify layout in frontmatter:
+```yaml
+layout: PostLayout    # Default - two-column with sidebar
+layout: PostSimple    # Single-column simplified
+layout: PostBanner    # Large banner image at top
+```

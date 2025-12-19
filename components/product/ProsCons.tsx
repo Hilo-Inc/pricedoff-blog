@@ -10,8 +10,8 @@ export default function ProsCons({ pros = [], cons = [] }: ProsConsProps) {
     <div className="not-prose my-8 grid gap-4 md:grid-cols-2">
       {/* Pros */}
       {pros.length > 0 && (
-        <div className="rounded-xl border border-green-200 bg-green-50 p-6 dark:border-green-800 dark:bg-green-950">
-          <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-green-800 dark:text-green-200">
+        <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-6 dark:border-emerald-800 dark:bg-emerald-950">
+          <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-emerald-800 dark:text-emerald-200">
             <svg
               className="h-6 w-6"
               fill="none"
@@ -31,7 +31,7 @@ export default function ProsCons({ pros = [], cons = [] }: ProsConsProps) {
             {pros.map((pro, index) => (
               <li
                 key={index}
-                className="flex items-start gap-2 text-green-700 dark:text-green-300"
+                className="flex items-start gap-2 text-emerald-700 dark:text-emerald-300"
               >
                 <svg
                   className="mt-0.5 h-5 w-5 shrink-0"
@@ -53,8 +53,8 @@ export default function ProsCons({ pros = [], cons = [] }: ProsConsProps) {
 
       {/* Cons */}
       {cons.length > 0 && (
-        <div className="rounded-xl border border-red-200 bg-red-50 p-6 dark:border-red-800 dark:bg-red-950">
-          <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-red-800 dark:text-red-200">
+        <div className="rounded-xl border border-rose-200 bg-rose-50 p-6 dark:border-rose-800 dark:bg-rose-950">
+          <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-rose-800 dark:text-rose-200">
             <svg
               className="h-6 w-6"
               fill="none"
@@ -74,7 +74,7 @@ export default function ProsCons({ pros = [], cons = [] }: ProsConsProps) {
             {cons.map((con, index) => (
               <li
                 key={index}
-                className="flex items-start gap-2 text-red-700 dark:text-red-300"
+                className="flex items-start gap-2 text-rose-700 dark:text-rose-300"
               >
                 <svg
                   className="mt-0.5 h-5 w-5 shrink-0"
